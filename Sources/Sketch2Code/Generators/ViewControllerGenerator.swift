@@ -77,7 +77,25 @@ class ViewControllerGenerator {
                                     tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: \(-constant)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
                                 }
                                 if resizingConstraint.contains(.top) {
-                                    tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: \(viewGenerator.element.frame.y)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                    // 确定最近的 top view
+                                    ///     let leastHue = hues.min { a, b in a.value < b.value }
+                                    if let nearestViewGenerator = viewGenerators
+                                        .filter({ !($0 === viewGenerator) && (viewGenerator.element.frame.y - ($0.element.frame.height + $0.element.frame.y) > 0) })
+                                        .min(by: { (l, r) -> Bool in
+                                            let lDistance = viewGenerator.element.frame.y - (l.element.frame.height + l.element.frame.y)
+                                            let rDistance = viewGenerator.element.frame.y - (r.element.frame.height + r.element.frame.y)
+                                            if rDistance < 0 {
+                                                return lDistance <= 0
+                                            } else if lDistance < 0 {
+                                                return rDistance <= 0
+                                            } else {
+                                                return lDistance < rDistance
+                                            }
+                                        }) {
+                                        tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).topAnchor.constraint(equalTo: \(nearestViewGenerator.propertyName).topAnchor, constant: \(viewGenerator.element.frame.y)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                    } else {
+                                        tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: \(viewGenerator.element.frame.y)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                    }
                                 }
                                 if resizingConstraint.contains(.bottom) {
                                     let constant = artboard.frame.height - viewGenerator.element.frame.y - viewGenerator.element.frame.height
