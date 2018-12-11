@@ -9,7 +9,8 @@
 import Foundation
 import SwiftSyntax
 
-let filePath = CommandLine.arguments[1] //  $SRCROOT/OtherResources/Example/pages/75A486A4-7B62-49CE-90C1-16027492BCC7.json
+let filePath = CommandLine.arguments[1] // $SRCROOT/OtherResources/Example/pages/75A486A4-7B62-49CE-90C1-16027492BCC7.json
+let outputPath = CommandLine.arguments[2] // $SRCROOT/Example/Example/UI.swift
 
 let pageJSONFileURL = URL(fileURLWithPath: filePath)
 let pageJSONData = try Data(contentsOf: pageJSONFileURL)
@@ -18,7 +19,9 @@ let jsonDecoder = JSONDecoder()
 do {
     let page = try jsonDecoder.decode(Sketch.Page.self, from: pageJSONData)
     let generator = UIGenerator(page: page)
-    print(generator.createSyntax())
+    let syntax = generator.createSyntax()
+    print(syntax)
+    try syntax.description.write(toFile: outputPath, atomically: true, encoding: String.Encoding.utf8)
 } catch {
     print(error)
 }

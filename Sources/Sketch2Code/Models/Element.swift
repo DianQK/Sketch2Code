@@ -17,6 +17,13 @@ extension Sketch {
         let frame: Rect
         let symbolID: String?
         let resizingConstraint: ResizingOptions
+//        "_class": "text",
+        let _class: Class
+
+        enum Class: String, Codable {
+            case text
+            case symbolInstance
+        }
 
         enum CodingKeys : String, CodingKey {
             case name
@@ -24,6 +31,7 @@ extension Sketch {
             case frame
             case symbolID
             case resizingConstraint
+            case _class
         }
 
     }

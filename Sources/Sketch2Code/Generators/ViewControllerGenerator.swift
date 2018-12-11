@@ -39,8 +39,10 @@ class ViewControllerGenerator {
 
                 let viewDidLoadDeclSyntax = SyntaxFactory.makeFunctionDecl(
                     attributes: nil,
-                    modifiers: nil,
-                    funcKeyword: SyntaxFactory.makeFuncKeyword(leadingTrivia: .spaces(4), trailingTrivia: .spaces(1)),
+                    modifiers: SyntaxFactory.makeModifierList([
+                        SyntaxFactory.makeDeclModifier(name: SyntaxFactory.makeIdentifier("override", leadingTrivia: .spaces(4), trailingTrivia: .spaces(1)), detail: nil)
+                        ]),
+                    funcKeyword: SyntaxFactory.makeFuncKeyword(trailingTrivia: .spaces(1)),
                     identifier: SyntaxFactory.makeIdentifier("viewDidLoad"),
                     genericParameterClause: nil,
                     signature: FunctionSignatureSyntax { (functionSignatureSyntaxBuilder: inout FunctionSignatureSyntaxBuilder) in
@@ -56,7 +58,8 @@ class ViewControllerGenerator {
 
                             let addSubviewsSyntaxs: [TokenSyntax] = viewGenerators.flatMap { (viewGenerator) -> [TokenSyntax] in
                                 return [
-                                    SyntaxFactory.makeUnknown("view.addSubview(\(viewGenerator.propertyName))", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1))
+                                    SyntaxFactory.makeUnknown("view.addSubview(\(viewGenerator.propertyName))", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)),
+                                    SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).translatesAutoresizingMaskIntoConstraints = false", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)),
                                 ]
                             }
 
@@ -67,6 +70,9 @@ class ViewControllerGenerator {
                                     SyntaxFactory.makeIdentifier("viewDidLoad"),
                                     SyntaxFactory.makeLeftParenToken(),
                                     SyntaxFactory.makeRightParenToken(trailingTrivia: .newlines(1))
+                                ] +
+                                [
+                                    SyntaxFactory.makeUnknown("view.backgroundColor = .white", leadingTrivia: .spaces(8), trailingTrivia: .newlines(1))
                                 ] +
                                 [SyntaxFactory.makeUnknown("", trailingTrivia: .newlines(1))] +
                                 addSubviewsSyntaxs +
