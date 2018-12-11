@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let keyWindow = UIWindow(frame: UIScreen.main.bounds)
         self.window = keyWindow
         keyWindow.makeKeyAndVisible()
-        keyWindow.rootViewController = GuideViewController()
+        keyWindow.rootViewController = LayoutViewController()
 
         return true
     }

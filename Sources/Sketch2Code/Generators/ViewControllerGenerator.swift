@@ -133,7 +133,7 @@ class ViewControllerGenerator {
                     }
                 )
                 $0.addDecl(viewDidLoadDeclSyntax)
-                $0.useRightBrace(SyntaxFactory.makeRightBraceToken(leadingTrivia: .newlines(1), trailingTrivia: .newlines(1)))
+                $0.useRightBrace(SyntaxFactory.makeRightBraceToken(leadingTrivia: .newlines(1), trailingTrivia: .newlines(2)))
             })
         }
         return viewControllerClass

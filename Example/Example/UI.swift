@@ -38,6 +38,14 @@ class GuideViewController : UIViewController {
 
     class NextButtonView : UIView {
 
+        required init() {
+            super.init(frame: CGRect.zero)
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
     }
 
     let nextButtonView: NextButtonView = NextButtonView()
@@ -67,3 +75,100 @@ class GuideViewController : UIViewController {
     }
 
 }
+
+class LayoutViewController : UIViewController {
+
+    class Rectangle4View : UIView {
+
+        required init() {
+            super.init(frame: CGRect.zero)
+            self.backgroundColor = UIColor(red: 0.5411764705882353, green: 0.4745098039215686, blue: 0.6862745098039216, alpha: 1.0)
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+    }
+
+    let rectangle4View: Rectangle4View = Rectangle4View()
+
+    class Rectangle3View : UIView {
+
+        required init() {
+            super.init(frame: CGRect.zero)
+            self.backgroundColor = UIColor(red: 0.8274509803921568, green: 0.5490196078431373, blue: 0.6784313725490195, alpha: 1.0)
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+    }
+
+    let rectangle3View: Rectangle3View = Rectangle3View()
+
+    class Rectangle2View : UIView {
+
+        required init() {
+            super.init(frame: CGRect.zero)
+            self.backgroundColor = UIColor(red: 1.0, green: 0.8235294117647058, blue: 0.6470588235294118, alpha: 1.0)
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+    }
+
+    let rectangle2View: Rectangle2View = Rectangle2View()
+
+    class Rectangle1View : UIView {
+
+        required init() {
+            super.init(frame: CGRect.zero)
+            self.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 0.7568627450980392, alpha: 1.0)
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+    }
+
+    let rectangle1View: Rectangle1View = Rectangle1View()
+
+    override func viewDidLoad () {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+
+        view.addSubview(rectangle4View)
+        rectangle4View.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(rectangle3View)
+        rectangle3View.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(rectangle2View)
+        rectangle2View.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(rectangle1View)
+        rectangle1View.translatesAutoresizingMaskIntoConstraints = false
+
+        rectangle4View.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20.0).isActive = true
+        rectangle4View.topAnchor.constraint(equalTo: rectangle3View.topAnchor, constant: 245.0).isActive = true
+        rectangle4View.widthAnchor.constraint(equalToConstant: 99.0).isActive = true
+        rectangle4View.heightAnchor.constraint(equalToConstant: 94.0).isActive = true
+        rectangle3View.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 140.0).isActive = true
+        rectangle3View.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -19.0).isActive = true
+        rectangle3View.topAnchor.constraint(equalTo: rectangle1View.topAnchor, constant: 130.0).isActive = true
+        rectangle3View.heightAnchor.constraint(equalToConstant: 94.0).isActive = true
+        rectangle2View.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20.0).isActive = true
+        rectangle2View.topAnchor.constraint(equalTo: rectangle1View.topAnchor, constant: 130.0).isActive = true
+        rectangle2View.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20.0).isActive = true
+        rectangle2View.widthAnchor.constraint(equalToConstant: 99.0).isActive = true
+        rectangle1View.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20.0).isActive = true
+        rectangle1View.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20.0).isActive = true
+        rectangle1View.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.0).isActive = true
+        rectangle1View.heightAnchor.constraint(equalToConstant: 90.0).isActive = true
+
+    }
+
+}
+

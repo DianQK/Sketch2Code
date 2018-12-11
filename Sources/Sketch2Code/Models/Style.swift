@@ -38,6 +38,27 @@ extension Sketch {
         
         let textStyle: TextStyle?
         
+        struct Fill: Codable {
+            
+            struct Color: Codable {
+
+                let alpha: Double
+                let blue: Double
+                let green: Double
+                let red: Double
+                
+                var rawCode: String {
+                    return "UIColor(red: \(red), green: \(green), blue: \(blue), alpha: \(alpha))"
+                }
+                
+            }
+            
+            let color: Color
+            
+        }
+        
+        let fills: [Fill]?
+        
     }
     
 }

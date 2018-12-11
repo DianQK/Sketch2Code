@@ -25,6 +25,7 @@ extension Sketch {
         enum Class: String, Codable {
             case text
             case symbolInstance
+            case rectangle
         }
 
         enum CodingKeys : String, CodingKey {
