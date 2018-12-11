@@ -78,7 +78,6 @@ class ViewControllerGenerator {
                                 }
                                 if resizingConstraint.contains(.top) {
                                     // 确定最近的 top view
-                                    ///     let leastHue = hues.min { a, b in a.value < b.value }
                                     if let nearestViewGenerator = viewGenerators
                                         .filter({ !($0 === viewGenerator) && (viewGenerator.element.frame.y - ($0.element.frame.height + $0.element.frame.y) > 0) })
                                         .min(by: { (l, r) -> Bool in
