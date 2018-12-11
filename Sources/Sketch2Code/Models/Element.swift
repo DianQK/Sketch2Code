@@ -17,8 +17,10 @@ extension Sketch {
         let frame: Rect
         let symbolID: String?
         let resizingConstraint: ResizingOptions
-//        "_class": "text",
         let _class: Class
+        
+        let attributedString: AttributedString?
+        let style: Style
 
         enum Class: String, Codable {
             case text
@@ -32,6 +34,8 @@ extension Sketch {
             case symbolID
             case resizingConstraint
             case _class
+            case attributedString
+            case style
         }
 
     }

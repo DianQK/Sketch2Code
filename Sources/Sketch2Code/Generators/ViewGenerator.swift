@@ -11,7 +11,7 @@ import SwiftSyntax
 class ViewGenerator {
 
     let element: Sketch.Element
-    let className: String
+    var className: String
 
     var propertyName: String {
         return className
@@ -52,6 +52,11 @@ class ViewGenerator {
 }
 
 class UILabelGenerator: ViewGenerator {
+    
+    override init(element: Sketch.Element) {
+        super.init(element: element)
+        self.className = "\(element.name.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "Label", with: ""))Label"
+    }
 
     override func createSyntax(leadingTriviaSpaces: Int) -> ClassDeclSyntax {
         return ClassDeclSyntax { (builder: inout ClassDeclSyntaxBuilder) in
@@ -81,11 +86,16 @@ class UILabelGenerator: ViewGenerator {
                     body: CodeBlockSyntax { (codeBlockSyntaxBuilder: inout CodeBlockSyntaxBuilder) in
                         codeBlockSyntaxBuilder.useLeftBrace(SyntaxFactory.makeLeftBraceToken(trailingTrivia: .newlines(1)))
                         codeBlockSyntaxBuilder.addCodeBlockItem(CodeBlockItemSyntax{ (codeBlockItemSyntaxBuilder: inout CodeBlockItemSyntaxBuilder) in
-                            codeBlockItemSyntaxBuilder.useItem(SyntaxFactory.makeTokenList([
+                            var tokenList: [TokenSyntax] = []
+                            tokenList.append(contentsOf: [
                                 SyntaxFactory.makeUnknown("super.init(frame: CGRect.zero)", leadingTrivia: .spaces(8 + leadingTriviaSpaces), trailingTrivia: .newlines(1)),
-                                SyntaxFactory.makeUnknown("self.frame = CGRect(x: 20, y: 20, width: 20, height: 20)", leadingTrivia: .spaces(8 + leadingTriviaSpaces), trailingTrivia: .newlines(1)),
-                                SyntaxFactory.makeUnknown("self.backgroundColor = .black", leadingTrivia: .spaces(8 + leadingTriviaSpaces), trailingTrivia: .newlines(1))
-                                ]))
+                                SyntaxFactory.makeUnknown("self.numberOfLines = 0", leadingTrivia: .spaces(8 + leadingTriviaSpaces), trailingTrivia: .newlines(1)),
+                                SyntaxFactory.makeUnknown("self.text = \(String(describing: element.attributedString?.string))", leadingTrivia: .spaces(8 + leadingTriviaSpaces), trailingTrivia: .newlines(1))
+                                ])
+                            if let MSAttributedStringFontAttributes = element.style.textStyle?.encodedAttributes.MSAttributedStringFontAttribute?.attributes {
+                                tokenList.append(SyntaxFactory.makeUnknown("self.font = UIFont(name: \"\(MSAttributedStringFontAttributes.name)\", size: \(MSAttributedStringFontAttributes.size)) ?? UIFont.systemFont(ofSize: \(MSAttributedStringFontAttributes.size))", leadingTrivia: .spaces(8 + leadingTriviaSpaces), trailingTrivia: .newlines(1)))
+                            }
+                            codeBlockItemSyntaxBuilder.useItem(SyntaxFactory.makeTokenList(tokenList))
                         })
                         codeBlockSyntaxBuilder.useRightBrace(SyntaxFactory.makeRightBraceToken(leadingTrivia: .spaces(4 + leadingTriviaSpaces), trailingTrivia: .newlines(2)))
                     }

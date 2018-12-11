@@ -14,12 +14,14 @@ extension Sketch {
 
         let id: String
         let name: String
+        let frame: Rect
         let layers: [Element]
 
         enum CodingKeys : String, CodingKey {
             case name
             case id = "do_objectID"
             case layers
+            case frame
         }
 
     }

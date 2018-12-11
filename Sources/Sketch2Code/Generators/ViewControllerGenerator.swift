@@ -56,11 +56,42 @@ class ViewControllerGenerator {
                         codeBlockSyntaxBuilder.useLeftBrace(SyntaxFactory.makeLeftBraceToken(trailingTrivia: .newlines(1)))
                         codeBlockSyntaxBuilder.addCodeBlockItem(CodeBlockItemSyntax { (codeBlockItemSyntaxBuilder: inout CodeBlockItemSyntaxBuilder) in
 
-                            let addSubviewsSyntaxs: [TokenSyntax] = viewGenerators.flatMap { (viewGenerator) -> [TokenSyntax] in
+                            let addSubviewsSyntaxes: [TokenSyntax] = viewGenerators.flatMap { (viewGenerator) -> [TokenSyntax] in
                                 return [
                                     SyntaxFactory.makeUnknown("view.addSubview(\(viewGenerator.propertyName))", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)),
                                     SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).translatesAutoresizingMaskIntoConstraints = false", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)),
                                 ]
+                            }
+                            
+                            let layoutSyntaxes: [TokenSyntax] = viewGenerators.flatMap { (viewGenerator) -> [TokenSyntax] in
+                                
+                                var tokenSyntaxes: [TokenSyntax] = []
+
+                                let resizingConstraint = viewGenerator.element.resizingConstraint
+                                
+                                if resizingConstraint.contains(.left) {
+                                    tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: \(viewGenerator.element.frame.x)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                }
+                                if resizingConstraint.contains(.right) {
+                                    let constant = artboard.frame.width - viewGenerator.element.frame.x - viewGenerator.element.frame.width
+                                    tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: \(-constant)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                }
+                                if resizingConstraint.contains(.top) {
+                                    tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: \(viewGenerator.element.frame.y)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                }
+                                if resizingConstraint.contains(.bottom) {
+                                    let constant = artboard.frame.height - viewGenerator.element.frame.y - viewGenerator.element.frame.height
+                                    tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: \(-constant)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                }
+                                if resizingConstraint.contains(.width) {
+                                    tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).widthAnchor.constraint(equalToConstant: \(viewGenerator.element.frame.width)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                }
+                                if resizingConstraint.contains(.height) {
+                                    tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).heightAnchor.constraint(equalToConstant: \(viewGenerator.element.frame.height)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                }
+                                
+                                return tokenSyntaxes
+
                             }
 
                             codeBlockItemSyntaxBuilder.useItem(SyntaxFactory.makeTokenList(
@@ -75,7 +106,9 @@ class ViewControllerGenerator {
                                     SyntaxFactory.makeUnknown("view.backgroundColor = .white", leadingTrivia: .spaces(8), trailingTrivia: .newlines(1))
                                 ] +
                                 [SyntaxFactory.makeUnknown("", trailingTrivia: .newlines(1))] +
-                                addSubviewsSyntaxs +
+                                addSubviewsSyntaxes +
+                                [SyntaxFactory.makeUnknown("", trailingTrivia: .newlines(1))] +
+                                layoutSyntaxes +
                                 [SyntaxFactory.makeUnknown("", trailingTrivia: .newlines(1))]
                             ))
                         })
