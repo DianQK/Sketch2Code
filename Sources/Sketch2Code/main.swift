@@ -17,7 +17,8 @@ let pageJSONData = try Data(contentsOf: pageJSONFileURL)
 let jsonDecoder = JSONDecoder()
 do {
     let page = try jsonDecoder.decode(Sketch.Page.self, from: pageJSONData)
-    print(page)
+    let generator = UIGenerator(page: page)
+    print(generator.createSyntax())
 } catch {
     print(error)
 }
