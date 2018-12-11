@@ -9,7 +9,7 @@
 import Foundation
 import SwiftSyntax
 
-let filePath = CommandLine.arguments[1] // $SRCROOT/OtherResources/page.json
+let filePath = CommandLine.arguments[1] //  $SRCROOT/OtherResources/Example/pages/75A486A4-7B62-49CE-90C1-16027492BCC7.json
 
 let pageJSONFileURL = URL(fileURLWithPath: filePath)
 let pageJSONData = try Data(contentsOf: pageJSONFileURL)
