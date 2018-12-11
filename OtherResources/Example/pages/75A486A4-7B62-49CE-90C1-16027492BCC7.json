@@ -138,7 +138,7 @@
                                 "MSAttributedStringFontAttribute": {
                                     "_class": "fontDescriptor",
                                     "attributes": {
-                                        "name": "SFProText-Semibold",
+                                        "name": "PingFangSC-Semibold",
                                         "size": 17
                                     }
                                 },
@@ -174,7 +174,7 @@
                                     "MSAttributedStringFontAttribute": {
                                         "_class": "fontDescriptor",
                                         "attributes": {
-                                            "name": "SFProText-Semibold",
+                                            "name": "PingFangSC-Semibold",
                                             "size": 17
                                         }
                                     },

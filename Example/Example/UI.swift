@@ -8,7 +8,7 @@ class GuideViewController : UIViewController {
             super.init(frame: CGRect.zero)
             self.numberOfLines = 0
             self.text = Optional("What happens if I don’t renew my license?")
-            self.font = UIFont(name: "SFProText-Semibold", size: 17.0) ?? UIFont.systemFont(ofSize: 17.0)
+            self.font = UIFont(name: "PingFangSC-Semibold", size: 17.0) ?? UIFont.systemFont(ofSize: 17.0)
         }
 
         required init?(coder aDecoder: NSCoder) {
