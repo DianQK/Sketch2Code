@@ -66,7 +66,7 @@ class GuideViewController : UIViewController {
         titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.0).isActive = true
         contentTextLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15.0).isActive = true
         contentTextLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15.0).isActive = true
-        contentTextLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 52.0).isActive = true
+        contentTextLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10.0).isActive = true
         nextButtonView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15.0).isActive = true
         nextButtonView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15.0).isActive = true
         nextButtonView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20.0).isActive = true
@@ -152,15 +152,15 @@ class LayoutViewController : UIViewController {
         rectangle1View.translatesAutoresizingMaskIntoConstraints = false
 
         rectangle4View.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20.0).isActive = true
-        rectangle4View.topAnchor.constraint(equalTo: rectangle3View.topAnchor, constant: 245.0).isActive = true
+        rectangle4View.topAnchor.constraint(equalTo: rectangle3View.bottomAnchor, constant: 21.0).isActive = true
         rectangle4View.widthAnchor.constraint(equalToConstant: 99.0).isActive = true
         rectangle4View.heightAnchor.constraint(equalToConstant: 94.0).isActive = true
         rectangle3View.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 140.0).isActive = true
         rectangle3View.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -19.0).isActive = true
-        rectangle3View.topAnchor.constraint(equalTo: rectangle1View.topAnchor, constant: 130.0).isActive = true
+        rectangle3View.topAnchor.constraint(equalTo: rectangle1View.bottomAnchor, constant: 20.0).isActive = true
         rectangle3View.heightAnchor.constraint(equalToConstant: 94.0).isActive = true
         rectangle2View.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20.0).isActive = true
-        rectangle2View.topAnchor.constraint(equalTo: rectangle1View.topAnchor, constant: 130.0).isActive = true
+        rectangle2View.topAnchor.constraint(equalTo: rectangle1View.bottomAnchor, constant: 20.0).isActive = true
         rectangle2View.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20.0).isActive = true
         rectangle2View.widthAnchor.constraint(equalToConstant: 99.0).isActive = true
         rectangle1View.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20.0).isActive = true

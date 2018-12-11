@@ -91,9 +91,12 @@ class ViewControllerGenerator {
                                                 return lDistance < rDistance
                                             }
                                         }) {
-                                        tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).topAnchor.constraint(equalTo: \(nearestViewGenerator.propertyName).topAnchor, constant: \(viewGenerator.element.frame.y)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                        let constant = viewGenerator.element.frame.y - (nearestViewGenerator.element.frame.height + nearestViewGenerator.element.frame.y)
+                                        tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).topAnchor.constraint(equalTo: \(nearestViewGenerator.propertyName).bottomAnchor, constant: \(constant)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                        print(nearestViewGenerator.className, viewGenerator.className)
                                     } else {
                                         tokenSyntaxes.append(SyntaxFactory.makeUnknown("\(viewGenerator.propertyName).topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: \(viewGenerator.element.frame.y)).isActive = true", leadingTrivia: .spaces(8), trailingTrivia: Trivia.newlines(1)))
+                                        print("view", viewGenerator.className)
                                     }
                                 }
                                 if resizingConstraint.contains(.bottom) {
