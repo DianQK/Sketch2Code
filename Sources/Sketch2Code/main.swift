@@ -9,12 +9,27 @@
 import Foundation
 import SwiftSyntax
 import ZIPFoundation
+import CommonCrypto
 
 let sketchFilePath = CommandLine.arguments[1] // $SRCROOT/OtherResources/Example.sketch
 let outputPath = CommandLine.arguments[2] // $SRCROOT/Example/Example/UI.swift
 
 let sketchFilePathURL = URL(fileURLWithPath: sketchFilePath)
 let sketchUnzipURL = URL(fileURLWithPath: sketchFilePath.replacingOccurrences(of: ".sketch", with: ""))
+
+do { // check sketch md5
+    let data = try Data(contentsOf: sketchFilePathURL)
+    var digestData = Data(count: Int(CC_MD5_DIGEST_LENGTH))
+    _ = digestData.withUnsafeMutableBytes { digestBytes in
+        data.withUnsafeBytes {messageBytes in
+            CC_MD5(messageBytes, CC_LONG(data.count), digestBytes)
+        }
+    }
+    let md5Hex = digestData.map { String(format: "%02hhx", $0) }.joined()
+    print(md5Hex)
+} catch {
+    print(error)
+}
 
 let fileManager = FileManager.default
 

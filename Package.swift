@@ -7,7 +7,7 @@ let package = Package(
     name: "Sketch2Code",
     dependencies: [
         .package(url: "https://github.com/apple/swift-syntax.git", .exact("0.40200.0")),
-        .package(url: "https://github.com/weichsel/ZIPFoundation/", .upToNextMajor(from: "0.9.0"))
+        .package(url: "https://github.com/weichsel/ZIPFoundation.git", .upToNextMajor(from: "0.9.0"))
     ],
     targets: [
         .target(

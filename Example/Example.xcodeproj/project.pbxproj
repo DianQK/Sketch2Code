@@ -68,6 +68,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 911CA6C421BFD48100348965 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
+				9147C2D521C0D51800C38840 /* ShellScript */,
 				911CA6AE21BFD48000348965 /* Sources */,
 				911CA6AF21BFD48000348965 /* Frameworks */,
 				911CA6B021BFD48000348965 /* Resources */,
@@ -125,6 +126,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9147C2D521C0D51800C38840 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n$SRCROOT/../.build/debug/Sketch2Code $SRCROOT/../OtherResources/Example.sketch $SRCROOT/Example/UI.swift \n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		911CA6AE21BFD48000348965 /* Sources */ = {
@@ -271,6 +292,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HY634B3FW2;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -288,6 +310,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HY634B3FW2;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

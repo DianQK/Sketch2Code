@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreTelephony
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,8 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         keyWindow.makeKeyAndVisible()
         keyWindow.rootViewController = LayoutViewController()
 
+//        telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
+        let telephonyNetworkInfo = CTTelephonyNetworkInfo()
+        print(telephonyNetworkInfo.serviceSubscriberCellularProviders)
+
         return true
     }
 
 }
 
+//Optional("中国联通")
