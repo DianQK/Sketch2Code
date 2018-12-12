@@ -78,6 +78,36 @@ class GuideViewController : UIViewController {
 
 class LayoutViewController : UIViewController {
 
+    class Rectangle6View : UIView {
+
+        required init() {
+            super.init(frame: CGRect.zero)
+            self.backgroundColor = UIColor(red: 0.0, green: 0.5333333333333333, blue: 0.5686274509803921, alpha: 1.0)
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+    }
+
+    let rectangle6View: Rectangle6View = Rectangle6View()
+
+    class Rectangle5View : UIView {
+
+        required init() {
+            super.init(frame: CGRect.zero)
+            self.backgroundColor = UIColor(red: 0.7450980392156863, green: 0.2156862745098039, blue: 0.2156862745098039, alpha: 1.0)
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+    }
+
+    let rectangle5View: Rectangle5View = Rectangle5View()
+
     class Rectangle4View : UIView {
 
         required init() {
@@ -142,6 +172,10 @@ class LayoutViewController : UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
+        view.addSubview(rectangle6View)
+        rectangle6View.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(rectangle5View)
+        rectangle5View.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(rectangle4View)
         rectangle4View.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(rectangle3View)
@@ -151,8 +185,16 @@ class LayoutViewController : UIViewController {
         view.addSubview(rectangle1View)
         rectangle1View.translatesAutoresizingMaskIntoConstraints = false
 
-        rectangle4View.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20.0).isActive = true
-        rectangle4View.topAnchor.constraint(equalTo: rectangle3View.bottomAnchor, constant: 21.0).isActive = true
+        rectangle6View.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 258.0).isActive = true
+        rectangle6View.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20.0).isActive = true
+        rectangle6View.topAnchor.constraint(equalTo: rectangle3View.bottomAnchor, constant: 20.0).isActive = true
+        rectangle6View.heightAnchor.constraint(equalToConstant: 163.0).isActive = true
+        rectangle5View.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 139.0).isActive = true
+        rectangle5View.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20.0).isActive = true
+        rectangle5View.topAnchor.constraint(equalTo: rectangle6View.bottomAnchor, constant: 20.0).isActive = true
+        rectangle5View.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20.0).isActive = true
+        rectangle4View.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 139.0).isActive = true
+        rectangle4View.topAnchor.constraint(equalTo: rectangle3View.bottomAnchor, constant: 20.0).isActive = true
         rectangle4View.widthAnchor.constraint(equalToConstant: 99.0).isActive = true
         rectangle4View.heightAnchor.constraint(equalToConstant: 94.0).isActive = true
         rectangle3View.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 140.0).isActive = true
