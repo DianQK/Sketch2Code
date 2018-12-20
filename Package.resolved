@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "CommonCrypto",
-        "repositoryURL": "https://github.com/IBM-Swift/CommonCrypto.git",
-        "state": {
-          "branch": "master",
-          "revision": "9156d238dbc4c15455b77b45e721b2bb0b995e31",
-          "version": null
-        }
-      },
-      {
         "package": "SwiftSyntax",
         "repositoryURL": "https://github.com/apple/swift-syntax.git",
         "state": {
